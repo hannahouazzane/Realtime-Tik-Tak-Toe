@@ -22,5 +22,17 @@ body {
 .square {
   width: min(200px, 25vw);
   height: min(200px, 25vw);
-  border: solid var(--primaryColor) 2px;
+  border-right: solid var(--primaryColor) 3px;
+  border-bottom: solid var(--primaryColor) 3px;
 }
+
+
+.square:nth-child(3n) {
+  border-right:none;
+} 
+
+.square:nth-child(6) ~ .square {
+  border-bottom:none;
+
+} 
+
