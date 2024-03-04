@@ -1,0 +1,38 @@
+:root {
+  --primaryColor: #fff;
+  --secondaryColor: #00213a;
+  --playerXColor: #e74c3c;
+  --playerOColor: #3498db;
+}
+
+body {
+  margin: 0;
+  background-color: var(--secondaryColor);
+}
+
+.board {
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-content: center;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+}
+
+.square {
+  width: min(200px, 25vw);
+  height: min(200px, 25vw);
+  border-right: solid var(--primaryColor) 3px;
+  border-bottom: solid var(--primaryColor) 3px;
+}
+
+
+.square:nth-child(3n) {
+  border-right:none;
+} 
+
+.square:nth-child(6) ~ .square {
+  border-bottom:none;
+
+} 
+
