@@ -1,35 +1,36 @@
 module.exports = {
-  parser: '@typescript-eslint/parser',
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:react/recommended',
-    'prettier',
-  ],
+  env: {
+    browser: true,
+    es2021: true,
+  },
   settings: {
     react: {
       version: 'detect',
     },
   },
-  env: {
-    browser: true,
-    es6: true,
-    node: true,
-  },
-  parserOptions: {
-    ecmaVersion: 2020,
-    sourceType: 'module',
-    ecmaFeatures: {
-      jsx: true,
-    },
-  },
-  rules: {},
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react/recommended',
+  ],
   overrides: [
     {
-      files: ['*.tsx'],
-      rules: {
-        'react/prop-types': 'off',
+      env: {
+        node: true,
+      },
+      files: ['.eslintrc.{js,cjs}'],
+      parserOptions: {
+        sourceType: 'script',
       },
     },
   ],
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+  },
+  plugins: ['@typescript-eslint', 'react'],
+  rules: {
+    'no-undef': 'error',
+  },
 }

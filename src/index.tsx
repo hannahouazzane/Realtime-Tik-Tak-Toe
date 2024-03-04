@@ -7,5 +7,5 @@ const App: React.FC = () => {
 
 const rootElement = document.getElementById('root') as HTMLElement
 const root = ReactDOM.createRoot(rootElement)
-hdh
+
 root.render(<App />)
