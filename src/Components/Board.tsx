@@ -21,6 +21,8 @@ export const Board = () => {
         return (
           <div
             className="square"
+            data-player={currentPlayer}
+            tabIndex={0}
             key={index}
             onClick={() => {
               updateGameBoard(index, currentPlayer)
