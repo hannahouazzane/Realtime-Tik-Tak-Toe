@@ -3,7 +3,16 @@ import ReactDOM from 'react-dom/client'
 import { Board } from './Components/Board'
 import './styles/global.css'
 const App: React.FC = () => {
-  return <Board />
+  return (
+    <>
+      <header>
+        <h1>Welcome to Tiktaktoe</h1>
+      </header>
+      <main>
+        <Board />
+      </main>
+    </>
+  )
 }
 
 const rootElement = document.getElementById('root') as HTMLElement
