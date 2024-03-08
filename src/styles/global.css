@@ -55,6 +55,14 @@ header {
   display: grid;
   grid-template-columns: repeat(3, auto);
   justify-content: center;
+  pointer-events: none;
+}
+
+
+.board[data-result="Pending"] {
+  pointer-events: all;
+
+
 }
 
 .square {
