@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react'
 import Circle from '../assets/circle.png'
 import Cross from '../assets/cross.png'
 
-export const Board = () => {
+type BoardTypes = {
+  gameResult: Array<string>
+  setGameResult: React.Dispatch<React.SetStateAction<Array<string>>>
+}
+export const Board: React.FC<BoardTypes> = ({ gameResult, setGameResult }) => {
   const [gameStatus, setGameStatus] = useState(Array(9).fill('_'))
 
   const [currentPlayer, setCurrentPlayer] = useState('X')
@@ -48,13 +52,11 @@ export const Board = () => {
   const isGameOver = (gameStatus: Array<string>, currentPlayer: string) => {
     const gameIncomplete = gameStatus.includes('_')
     if (hasWon(gameStatus, currentPlayer)) {
-      //add setOutcome
-      return
+      setGameResult(['Won', currentPlayer])
     } else if (gameIncomplete) {
       return
     } else {
-      //add setOutcome
-      return
+      setGameResult(['Draw'])
     }
   }
 
@@ -69,7 +71,7 @@ export const Board = () => {
   }, [gameStatus])
 
   return (
-    <div className="board">
+    <div data-result={gameResult} className="board">
       {gameStatus.map((_, index) => {
         return (
           <div

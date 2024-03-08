@@ -1,15 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom/client'
 import { Board } from './Components/Board'
 import './styles/global.css'
+import DialogBox from './Components/DialogBox/DialogBox'
 const App: React.FC = () => {
+  const [result, setResult] = useState(['Pending'])
+
   return (
     <>
       <header>
         <h1>Welcome to Tiktaktoe</h1>
       </header>
       <main>
-        <Board />
+        <Board gameResult={result} setGameResult={setResult} />
+        {result[0] !== 'Pending' && <DialogBox result={result} />}
       </main>
     </>
   )
