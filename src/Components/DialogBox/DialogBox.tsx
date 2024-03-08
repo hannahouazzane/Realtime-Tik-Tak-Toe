@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react'
+import './DialogBox.css'
 type DialogBoxType = {
   result: Array<string>
 }
@@ -19,13 +20,14 @@ const DialogBox: React.FC<DialogBoxType> = ({ result }) => {
   }
 
   useEffect(() => {
-    if (dialogRef.current !== null) {
+    if (dialogRef.current !== null && resultStatus !== 'Pending') {
       dialogRef.current.showModal()
     }
-  }, [])
+  }, [result])
   return (
     <dialog ref={dialogRef}>
       <button
+        className="close-box-btn"
         onClick={() => {
           closeDialogBox()
         }}
@@ -39,6 +41,7 @@ const DialogBox: React.FC<DialogBoxType> = ({ result }) => {
       </p>
 
       <button
+        className="start-again-btn"
         onClick={() => {
           refreshPage()
         }}

@@ -41,7 +41,7 @@ h1 {
   font-family: 'Helvetica Neue', sans-serif;
   margin: 1.5rem 0;
   text-shadow: 5px 0px 0px var(--tertiaryColor);
-  font-size: 86px;
+  font-size: clamp(2.8rem, 6vw, 4.7rem);
   text-align: center;
   letter-spacing: 0.9px;
   color: var(--primaryColor);
