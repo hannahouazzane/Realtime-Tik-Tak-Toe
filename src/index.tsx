@@ -13,7 +13,7 @@ const App: React.FC = () => {
       </header>
       <main>
         <Board gameResult={result} setGameResult={setResult} />
-        {result[0] !== 'Pending' && <DialogBox result={result} />}
+        <DialogBox result={result} />
       </main>
     </>
   )

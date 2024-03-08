@@ -1,0 +1,57 @@
+dialog[open] {
+  width: min(600px, 45vw);
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  border-radius: 10px;
+  border: none;
+  padding: 4rem;
+  height: fit-content;
+}
+
+dialog::backdrop {
+  background: linear-gradient(var(--tertiaryColor), var(--secondaryColor));
+  opacity: 0.6;
+}
+
+dialog p {
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  color: var(--secondaryColor);
+  margin: 0;
+  font-weight: bold;
+  text-align: center;
+}
+
+dialog button {
+  background: var(--tertiaryColor);
+  color: var(--primaryColor);
+}
+
+dialog button:hover {
+  background-color: #5f0787;
+  transition-duration: 400ms;
+}
+
+dialog button:active {
+  background-color: var(--secondaryColor);
+  transition-duration: 400ms;
+}
+
+.start-again-btn {
+  border-radius: 10px;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.close-box-btn {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  border: none;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
