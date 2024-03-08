@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Circle from '../assets/circle.png'
 import Cross from '../assets/cross.png'
 
 export const Board = () => {
-  const [gameStatus, setGameStatus] = useState(Array(9).fill(null))
+  const [gameStatus, setGameStatus] = useState(Array(9).fill('_'))
 
   const [currentPlayer, setCurrentPlayer] = useState('X')
 
@@ -11,10 +11,63 @@ export const Board = () => {
     setGameStatus((currentStatus) => {
       const updatedList = [...currentStatus]
       updatedList[square] = player
+
       return updatedList
     })
-    setCurrentPlayer((current) => (current === 'X' ? 'O' : 'X'))
   }
+
+  const winningPatterns = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ]
+
+  const hasWon = (gameStatus: Array<string>, currentPlayer: string) => {
+    let stateWin = null
+    winningPatterns.forEach((pattern) => {
+      let winningPattern = true
+      pattern.forEach((digit) => {
+        if (gameStatus[digit] !== currentPlayer) {
+          winningPattern = false
+        }
+      })
+
+      if (winningPattern) {
+        stateWin = true
+      }
+    })
+
+    return stateWin
+  }
+
+  const isGameOver = (gameStatus: Array<string>, currentPlayer: string) => {
+    const gameIncomplete = gameStatus.includes('_')
+    if (hasWon(gameStatus, currentPlayer)) {
+      //add setOutcome
+      return
+    } else if (gameIncomplete) {
+      return
+    } else {
+      //add setOutcome
+      return
+    }
+  }
+
+  useEffect(() => {
+    isGameOver(gameStatus, currentPlayer)
+
+    const gameStarted = gameStatus.some((item) => item !== '_')
+
+    if (gameStarted) {
+      setCurrentPlayer((current) => (current === 'X' ? 'O' : 'X'))
+    }
+  }, [gameStatus])
+
   return (
     <div className="board">
       {gameStatus.map((_, index) => {
