@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Circle from '../assets/circle.png'
 import Cross from '../assets/cross.png'
 
-type BoardTypes = {
+export type BoardTypes = {
   gameResult: Array<string>
   setGameResult: React.Dispatch<React.SetStateAction<Array<string>>>
 }
@@ -84,9 +84,9 @@ export const Board: React.FC<BoardTypes> = ({ gameResult, setGameResult }) => {
             }}
           >
             {gameStatus[index] === 'X' ? (
-              <img src={Cross} />
+              <img src={Cross} alt="Cross" />
             ) : gameStatus[index] === 'O' ? (
-              <img src={Circle} />
+              <img src={Circle} alt="Naught" />
             ) : null}
           </div>
         )
