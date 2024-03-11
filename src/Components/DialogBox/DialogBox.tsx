@@ -25,30 +25,34 @@ const DialogBox: React.FC<DialogBoxType> = ({ result }) => {
     }
   }, [result])
   return (
-    <dialog ref={dialogRef}>
-      <button
-        className="close-box-btn"
-        onClick={() => {
-          closeDialogBox()
-        }}
-      >
-        X
-      </button>
-      <p>
-        {resultStatus === 'Won'
-          ? `Congratulations ${playerThatWon}, looks like you won! `
-          : 'Looks like a draw'}
-      </p>
+    <>
+      {resultStatus !== 'Pending' && (
+        <dialog ref={dialogRef}>
+          <button
+            className="close-box-btn"
+            onClick={() => {
+              closeDialogBox()
+            }}
+          >
+            X
+          </button>
+          <p>
+            {resultStatus === 'Won'
+              ? `Congratulations ${playerThatWon}, looks like you won! `
+              : 'Looks like a draw'}
+          </p>
 
-      <button
-        className="start-again-btn"
-        onClick={() => {
-          refreshPage()
-        }}
-      >
-        Start Again
-      </button>
-    </dialog>
+          <button
+            className="start-again-btn"
+            onClick={() => {
+              refreshPage()
+            }}
+          >
+            Start Again
+          </button>
+        </dialog>
+      )}
+    </>
   )
 }
 
