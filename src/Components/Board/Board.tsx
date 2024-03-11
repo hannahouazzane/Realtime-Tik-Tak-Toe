@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import Circle from '../assets/circle.png'
-import Cross from '../assets/cross.png'
+import Circle from '../../assets/circle.png'
+import Cross from '../../assets/cross.png'
 
 export type BoardTypes = {
   gameResult: Array<string>
