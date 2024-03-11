@@ -14,7 +14,8 @@
   },
   "lint-staged": {
     "*.{js, jsx,ts,tsx}": [
-      "eslint --fix"
+      "eslint --fix",
+      "jest --findRelatedTests"
     ],
     "*.{json,js,ts,jsx,tsx,html}": [
       "prettier --write --ignore-unknown"
