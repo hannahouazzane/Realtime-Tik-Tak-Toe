@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom/client'
-import { Board } from './Components/Board'
+import { Board } from './Components/Board/Board'
 import './styles/global.css'
 import DialogBox from './Components/DialogBox/DialogBox'
 const App: React.FC = () => {
