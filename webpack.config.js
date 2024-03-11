@@ -1,10 +1,11 @@
-/* eslint-disable no-undef */
-/* eslint-disable @typescript-eslint/no-var-requires */
+import path from 'path'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
+import { fileURLToPath } from 'url'
 
-const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const __filename = fileURLToPath(import.meta.url)
 
-module.exports = {
+const __dirname = path.dirname(__filename)
+export default {
   entry: './src/index.tsx',
   output: {
     filename: 'bundle.js',

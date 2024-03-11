@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Updated version of a tik tak toe game I created last year!",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "webpack serve --open",
     "build": "webpack --mode production",
