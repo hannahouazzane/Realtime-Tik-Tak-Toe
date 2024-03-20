@@ -29,10 +29,15 @@ header {
 }
 
 main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+main:has(div.board) {
   flex-grow: 1;
   display: flex;
   margin: 0;
-
   align-items: center;
   justify-content: center;
 }
@@ -58,11 +63,8 @@ header {
   pointer-events: none;
 }
 
-
-.board[data-result="Pending"] {
+.board[data-result='Pending'] {
   pointer-events: all;
-
-
 }
 
 .square {
