@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "nodenext",
+    "target": "es2022",
+    "outDir": "./dist",
+    "esModuleInterop": true
+  },
+  "include": ["./**/*"],
+  "exclude": ["node_modules", "dist"]
+}
