@@ -2,77 +2,62 @@ import React, { useState, useEffect } from 'react'
 import Circle from '../../assets/circle.png'
 import Cross from '../../assets/cross.png'
 
+import { socket } from '../..'
 export type BoardTypes = {
   gameResult: Array<string>
   setGameResult: React.Dispatch<React.SetStateAction<Array<string>>>
 }
 export const Board: React.FC<BoardTypes> = ({ gameResult, setGameResult }) => {
-  const [gameStatus, setGameStatus] = useState(Array(9).fill('_'))
+  const [gameScore, setGameScore] = useState(Array(9).fill('_'))
 
   const [currentPlayer, setCurrentPlayer] = useState('X')
 
-  const updateGameBoard = (square: number, player: string) => {
-    setGameStatus((currentStatus) => {
-      const updatedList = [...currentStatus]
-      updatedList[square] = player
+  const player = sessionStorage.getItem('player')
+  const room = sessionStorage.getItem('room')
+  const isCurrentPlayer = player === currentPlayer
 
-      return updatedList
-    })
-  }
-
-  const winningPatterns = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ]
-
-  const hasWon = (gameStatus: Array<string>, currentPlayer: string) => {
-    let stateWin = null
-    winningPatterns.forEach((pattern) => {
-      let winningPattern = true
-      pattern.forEach((digit) => {
-        if (gameStatus[digit] !== currentPlayer) {
-          winningPattern = false
-        }
-      })
-
-      if (winningPattern) {
-        stateWin = true
-      }
-    })
-
-    return stateWin
-  }
-
-  const isGameOver = (gameStatus: Array<string>, currentPlayer: string) => {
-    const gameIncomplete = gameStatus.includes('_')
-    if (hasWon(gameStatus, currentPlayer)) {
-      setGameResult(['Won', currentPlayer])
-    } else if (gameIncomplete) {
-      return
-    } else {
-      setGameResult(['Draw'])
-    }
+  const playMade = (square: number) => {
+    socket.emit('playMade', { square: square, player: currentPlayer, room: room })
   }
 
   useEffect(() => {
-    isGameOver(gameStatus, currentPlayer)
+    socket.on('gameStarted', () => {
+      setGameResult(['Started'])
+      console.log('received result')
+    })
+    socket.on('gameInfo', (data) => {
+      const player = data.player
+      const room = data.room
+      console.log("am i getting the game info")
+      sessionStorage.setItem('player', player)
+      sessionStorage.setItem('room', room)
+    })
 
-    const gameStarted = gameStatus.some((item) => item !== '_')
 
-    if (gameStarted) {
-      setCurrentPlayer((current) => (current === 'X' ? 'O' : 'X'))
+ 
+    socket.on('results', ({gameScore, gameStatus})=> {
+      setGameScore(gameScore)
+      setGameResult(gameStatus)
+
+      if(gameStatus === 'Started') {
+        setCurrentPlayer((current) => (current === 'X' ? 'O' : 'X'))
+
+      }
+    })
+
+  
+    
+
+    return () => {
+      socket.off('connect')
+      
+      socket.off('gameInfo')
     }
-  }, [gameStatus])
+  }, [])
 
   return (
-    <div data-result={gameResult} className="board">
-      {gameStatus.map((_, index) => {
+    <div data-result={gameResult} data-can-play={isCurrentPlayer} className="board">
+      {gameScore.map((_, index) => {
         return (
           <div
             className="square"
@@ -80,12 +65,12 @@ export const Board: React.FC<BoardTypes> = ({ gameResult, setGameResult }) => {
             tabIndex={0}
             key={index}
             onClick={() => {
-              updateGameBoard(index, currentPlayer)
+              playMade(index)
             }}
           >
-            {gameStatus[index] === 'X' ? (
+            {gameScore[index] === 'X' ? (
               <img src={Cross} alt="Cross" />
-            ) : gameStatus[index] === 'O' ? (
+            ) : gameScore[index] === 'O' ? (
               <img src={Circle} alt="Naught" />
             ) : null}
           </div>

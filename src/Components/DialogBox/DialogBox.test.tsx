@@ -10,7 +10,7 @@ HTMLDialogElement.prototype.close = jest.fn(function mock(this: HTMLDialogElemen
 })
 
 test('Dialog box is not visible when game is ongoing', () => {
-  render(<DialogBox result={['Pending']} />)
+  render(<DialogBox result={['Playing']} />)
   const dialogElement = screen.queryByRole('dialog')
   expect(dialogElement).toBeNull
 })
