@@ -1,21 +1,26 @@
 import React, { useState, useEffect } from 'react'
+
 import Circle from '../../assets/circle.png'
 import Cross from '../../assets/cross.png'
 
 import { socket } from '../..'
+
 export type BoardTypes = {
   gameResult: Array<string>
   setGameResult: React.Dispatch<React.SetStateAction<Array<string>>>
 }
+
 export const Board: React.FC<BoardTypes> = ({ gameResult, setGameResult }) => {
   const [gameScore, setGameScore] = useState(Array(9).fill('_'))
-
   const [currentPlayer, setCurrentPlayer] = useState('X')
 
+  // stores player info to map onto room object on the server
   const player = sessionStorage.getItem('player')
   const room = sessionStorage.getItem('room')
+
   const isCurrentPlayer = player === currentPlayer
 
+  // sends square selected and player details to the server when are square is selected
   const playMade = (square: number) => {
     socket.emit('playMade', { square: square, player: currentPlayer, room: room })
   }
@@ -28,29 +33,26 @@ export const Board: React.FC<BoardTypes> = ({ gameResult, setGameResult }) => {
     socket.on('gameInfo', (data) => {
       const player = data.player
       const room = data.room
-      console.log("am i getting the game info")
       sessionStorage.setItem('player', player)
       sessionStorage.setItem('room', room)
     })
 
-
- 
-    socket.on('results', ({gameScore, gameStatus})=> {
+    socket.on('gameResults', ({ gameScore, gameStatus }) => {
+      console.log(gameScore)
       setGameScore(gameScore)
       setGameResult(gameStatus)
 
-      if(gameStatus === 'Started') {
+      if (gameStatus === 'Started') {
         setCurrentPlayer((current) => (current === 'X' ? 'O' : 'X'))
-
       }
     })
 
-  
-    
+
+
 
     return () => {
       socket.off('connect')
-      
+
       socket.off('gameInfo')
     }
   }, [])
