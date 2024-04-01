@@ -1,9 +1,15 @@
-interface GameInformation {
+export interface GameInformation {
   gameScore: string[]
-  gameStatus: string
+  gameStatus: string | string[]
   roomStatus: number
-  playerX: string
-  playerO: string
+  player1: string
+  player2: string
+}
+
+export interface UserInformation {
+  room: string
+  name: string
 }
 
 export type GamesType = Record<string, GameInformation>
+export type UserType = Record<string, UserInformation>
