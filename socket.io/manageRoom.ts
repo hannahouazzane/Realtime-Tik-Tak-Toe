@@ -8,34 +8,40 @@ const randomPlayerTypeSelector = () => {
   return selectPlayerOptionRandom
 }
 
-export const updateRoomStatus = async (roomNumber: string, game: GamesType) => {
+export const updateRoomStatus = async (roomNumber: string, game: GamesType, id: string) => {
   const socketsInRoomObj = await io.in(roomNumber).fetchSockets()
 
+  //retrieves an array of all the players in the room
   const socketInRoomArray = socketsInRoomObj.map((socket) => socket.id)
+  //calculates number of players
   const roomOccupancy = socketInRoomArray.length
-  // add
+
   if (roomOccupancy > 1) {
+    let assignedPlayer = null
     const gameRoomData = game[roomNumber]
     gameRoomData.roomStatus = roomOccupancy
     gameRoomData.gameStatus = 'Started'
-
-    if (gameRoomData.player1 === 'X') {
-      gameRoomData.player2 = 'O'
+    // other player already had their player role randomly assigned so the current player only has one option. This adds the player role to the games object
+    if (gameRoomData.X) {
+      gameRoomData.O = id
+      assignedPlayer = 'O'
     } else {
-      gameRoomData.player2 = 'X'
+      gameRoomData.X = id
+      assignedPlayer = 'X'
     }
 
-    return gameRoomData.player2
+    return assignedPlayer
   } else {
     game[roomNumber] = {
       gameScore: Array(9).fill('_'),
       gameStatus: 'Not started',
       roomStatus: roomOccupancy,
-      player1: '',
-      player2: '',
+      X: '',
+      O: '',
     }
     const gameRoomData = game[roomNumber]
-    gameRoomData['player1'] = randomPlayerTypeSelector()
-    return gameRoomData.player1
+    const randomlyAssignedPlayer = randomPlayerTypeSelector()
+    gameRoomData[randomlyAssignedPlayer] = id
+    return randomlyAssignedPlayer
   }
 }

@@ -2,14 +2,15 @@ export interface GameInformation {
   gameScore: string[]
   gameStatus: string | string[]
   roomStatus: number
-  player1: string
-  player2: string
+  X: string
+  O: string
 }
 
-export interface UserInformation {
+export interface PlayerInformation {
   room: string
   name: string
+  player: string
 }
 
 export type GamesType = Record<string, GameInformation>
-export type UserType = Record<string, UserInformation>
+export type PlayerType = Map<string, PlayerInformation>
