@@ -24,27 +24,9 @@ dialog p {
   text-align: center;
 }
 
-dialog button {
-  background: var(--tertiaryColor);
-  color: var(--primaryColor);
-}
 
-dialog button:hover {
-  background-color: #5f0787;
-  transition-duration: 400ms;
-}
 
-dialog button:active {
-  background-color: var(--secondaryColor);
-  transition-duration: 400ms;
-}
 
-.start-again-btn {
-  border-radius: 10px;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-}
 
 .close-box-btn {
   height: 30px;

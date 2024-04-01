@@ -52,6 +52,7 @@ export const Lobby = () => {
         id="room-number"
         name="room-number"
         value={userData.roomNumber}
+        required
         onChange={(e) => {
           setUserData((data) => {
             return { ...data, roomNumber: e.target.value }
@@ -60,7 +61,7 @@ export const Lobby = () => {
         type="text"
       />
 
-      <button type="submit">Join room</button>
+      <button className="text-button" type="submit">Join room</button>
 
       {errorMessage && <p>{errorMessage}</p>}
     </form>

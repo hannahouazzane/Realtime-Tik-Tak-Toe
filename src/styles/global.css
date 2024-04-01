@@ -30,6 +30,7 @@ header {
 
 main {
   display: flex;
+  margin: 2rem;
   align-items: center;
   justify-content: center;
 }
@@ -50,20 +51,87 @@ h1 {
   text-align: center;
   letter-spacing: 0.9px;
   color: var(--primaryColor);
+  opacity: 0;
+  animation: fadeIn 3s ease forwards;
+
+ 
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+
+  }
+  to {
+    opacity: 1;
+
+  }
 }
 
 header {
   border-bottom: solid 2px var(--tertiaryColor);
 }
 
-.board  {
+input {
+  display: block;
+  border-radius: 2rem;
+  max-width: 300px;
+  padding: 0.5rem;
+  width: 100%;
+  border: solid var(--tertiaryColor);
+}
+
+label {
+  font-size: 20px;
+  color: var(--secondaryColor);
+}
+
+form {
+  background-color: var(--primaryColor);
+  max-width: 800px;
+  width: 100%;
+  margin: 4rem auto;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 20px 15px 0 6px var(--tertiaryColor);
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  animation: fadeIn 3s ease forwards ;
+}
+
+button {
+  background: var(--tertiaryColor);
+  color: var(--primaryColor);
+}
+
+button:hover {
+  background-color: #5f0787;
+  transition-duration: 400ms;
+}
+
+button:active {
+  background-color: var(--secondaryColor);
+  transition-duration: 400ms;
+}
+
+.text-button {
+  border-radius: 10px;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.board {
   display: grid;
   grid-template-columns: repeat(3, auto);
   justify-content: center;
   pointer-events: none;
 }
 
-.board[data-result="Started"][data-can-play="true"] {
+.board[data-result='Started'][data-can-play='true'] {
   background-color: red;
   pointer-events: all;
 }

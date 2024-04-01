@@ -49,7 +49,7 @@ const DialogBox: React.FC<DialogBoxType> = ({ result }) => {
           </p>
 
           <button
-            className="start-again-btn"
+            className="text-button"
             onClick={() => {
               refreshPage()
             }}
