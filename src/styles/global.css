@@ -56,14 +56,15 @@ header {
   border-bottom: solid 2px var(--tertiaryColor);
 }
 
-.board {
+.board  {
   display: grid;
   grid-template-columns: repeat(3, auto);
   justify-content: center;
   pointer-events: none;
 }
 
-.board[data-result='Pending'] {
+.board[data-result="Started"][data-can-play="true"] {
+  background-color: red;
   pointer-events: all;
 }
 

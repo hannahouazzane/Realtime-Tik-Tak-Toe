@@ -9,7 +9,7 @@ let squares: Record<number, Element | null> = {}
 
 beforeEach(() => {
   jest.clearAllMocks()
-  const { container } = render(<Board gameResult={['Pending']} setGameResult={mockSetGameResult} />)
+  const { container } = render(<Board gameResult={['Playing']} setGameResult={mockSetGameResult} />)
 
   // Initialize squares dynamically
   squares = {}

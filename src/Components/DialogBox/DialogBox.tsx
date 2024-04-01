@@ -19,14 +19,20 @@ const DialogBox: React.FC<DialogBoxType> = ({ result }) => {
     }
   }
 
+  console.log(resultStatus)
+
+  const showModal = resultStatus === 'Won' || resultStatus === 'Draw';
+  console.log("this has run")
+  console.log(showModal)
+
   useEffect(() => {
-    if (dialogRef.current !== null && resultStatus !== 'Pending') {
+    if (dialogRef.current !== null && showModal) {
       dialogRef.current.showModal()
     }
   }, [result])
   return (
     <>
-      {resultStatus !== 'Pending' && (
+      {showModal && (
         <dialog ref={dialogRef}>
           <button
             className="close-box-btn"
